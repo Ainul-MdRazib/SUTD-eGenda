@@ -1,10 +1,13 @@
 package com.khaisheen.egenda.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.khaisheen.egenda.Adapters.NewSubjectAdapter;
@@ -24,29 +27,15 @@ public class AddSubjectActivity extends AppCompatActivity {
         rvAddSubject.setLayoutManager(new LinearLayoutManager(this));
         rvAddSubject.setAdapter(new NewSubjectAdapter());
 
-//        Spinner spinnerSubjectCode = findViewById(R.id.spinnerSubjectCode);
-//        Spinner spinnerLessonOne = findViewById(R.id.spinnerLessonOne);
-//        Spinner spinnerLessonTwo = findViewById(R.id.spinnerLessonTwo);
-//        Spinner spinnerLessonThree = findViewById(R.id.spinnerLessonThree);
-//
-//        List<String> subjectCodes = new ArrayList<>();
-//        subjectCodes.add("-");
-//        subjectCodes.add("50.005");
-//        subjectCodes.add("50.003");
-//        Collections.sort(subjectCodes);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, subjectCodes);
-//        spinnerSubjectCode.setAdapter(adapter);
-//
-//        List<String> durations = new ArrayList<>();
-//        durations.add("-");
-//        durations.add("1.5");
-//        durations.add("2.0");
-//        durations.add("2.5");
-//        durations.add("3.0");
-//        ArrayAdapter<String> durationsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, durations);
-//        spinnerLessonOne.setAdapter(durationsAdapter);
-//        spinnerLessonTwo.setAdapter(durationsAdapter);
-//        spinnerLessonThree.setAdapter(durationsAdapter);
+        Button buttonAdd = findViewById(R.id.buttonAdd);
+        Button buttonCancel = findViewById(R.id.buttonCancel);
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AddSubjectActivity.this, MainActivity.class));
+            }
+        });
     }
 
 }
