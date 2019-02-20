@@ -1,6 +1,24 @@
 <resources>
     <string name="app_name">eGenda</string>
     <string name="title_activity_login">Sign in</string>
+    <string-array name="profs">
+        <item>Natalie</item>
+        <item>Sudipta</item>
+        <item>David Yau</item>
+        <item>Ernest</item>
+        <item>Tony</item>
+        <item>Sun Jun</item>
+        <item>Gemma</item>
+    </string-array>
+    <string-array name="cohorts">
+        <item>istdt5c1</item>
+        <item>istdt5c2</item>
+        <item>istdt5c3</item>
+        <item>esdt5c1</item>
+        <item>esdt5c2</item>
+        <item>epdt5c1</item>
+        <item>epdt5c2</item>
+    </string-array>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
