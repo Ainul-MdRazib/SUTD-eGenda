@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">eGenda</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="prof_name">PROFNAME</string>
     <string-array name="profs">
         <item>Natalie</item>
         <item>Sudipta</item>

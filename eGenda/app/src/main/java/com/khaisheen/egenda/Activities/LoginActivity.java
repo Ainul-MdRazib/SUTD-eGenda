@@ -8,15 +8,17 @@ import android.widget.Button;
 
 import com.khaisheen.egenda.R;
 
-public class LoginActivity extends AppCompatActivity {
+// Login page
 
+public class LoginActivity extends AppCompatActivity {
+    Button login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        Button login = findViewById(R.id.buttonLogin);
-
+        login = findViewById(R.id.buttonLogin);
+        /* LOG IN */
+        /* TODO: AUTH STUFF */
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".Activities.ProfessorsActivity">
 
+    <Button
+        android:id="@+id/buttonApplyP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:onClick="onApply"
+        android:text="Apply"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="match_parent"
@@ -55,13 +66,13 @@
                     app:layout_constraintVertical_bias="0.512" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/defaultProf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="68dp"
                     android:layout_marginStart="68dp"
                     android:singleLine="false"
-                    android:text="Natalie"
+                    android:text="@string/prof_name"
                     android:textAllCaps="false"
                     android:textStyle="italic"
                     app:layout_constraintBottom_toBottomOf="parent"

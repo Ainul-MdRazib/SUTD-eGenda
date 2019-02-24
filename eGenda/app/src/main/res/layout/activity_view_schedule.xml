@@ -9,7 +9,7 @@
     tools:context=".Activities.ViewScheduleActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewOfSchedule"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginEnd="16dp"

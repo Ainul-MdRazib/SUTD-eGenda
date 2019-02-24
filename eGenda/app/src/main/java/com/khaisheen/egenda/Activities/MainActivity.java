@@ -8,31 +8,35 @@ import android.widget.Button;
 
 import com.khaisheen.egenda.R;
 
+// Main page
 public class MainActivity extends AppCompatActivity {
+    Button buttonViewSchedule;
+    Button buttonAddSubject;
+    Button buttonLogOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTheme(R.style.AppTheme_NoActionBar);
-        Button buttonViewSchedule = findViewById(R.id.buttonViewSchedule);
-        Button buttonAddSubject = findViewById(R.id.buttonAddSubject);
-        Button buttonLogOut = findViewById(R.id.buttonLogOut);
-
-        buttonAddSubject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AddSubjectActivity.class));
-            }
-        });
-
+        buttonAddSubject = findViewById(R.id.buttonAddSubject);
+        buttonViewSchedule = findViewById(R.id.buttonViewSchedule);
+        buttonLogOut = findViewById(R.id.buttonLogOut);
+        /* Go to viewscheduleactivity */
         buttonViewSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, ViewScheduleActivity.class));
             }
         });
-
+        /* Go to addsubjectactivity */
+        buttonAddSubject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, AddSubjectActivity.class));
+            }
+        });
+        /* LOG OUT */
+        /* TODO: AUTH STUFF */
         buttonLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

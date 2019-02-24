@@ -7,10 +7,11 @@
     tools:context=".Activities.CohortsActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonApplyC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:onClick="onApply"
         android:text="Apply"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +37,7 @@
         android:id="@+id/linearcohorts"
         android:layout_width="match_parent"
         android:layout_height="315dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="8dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
