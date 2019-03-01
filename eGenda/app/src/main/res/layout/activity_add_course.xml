@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.AddCourseActivity">
+
+    <TextView
+        android:id="@+id/AddCourseGreeting"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Add New Course"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/simpleProgressBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/AddCourseGreeting"
+        app:layout_constraintLeft_toLeftOf="parent"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/courseFrame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/AddCourseGreeting"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guide30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guide50"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/SubjectField"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="Subject: "
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/guide30"
+            app:layout_constraintTop_toTopOf="@id/courseFrame" />
+
+        <Spinner
+            android:id="@+id/SubjectSpinner"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            app:layout_constraintLeft_toRightOf="@id/SubjectField"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/courseFrame" />
+
+        <TextView
+            android:id="@+id/DurationField"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="Duration: "
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/guide30"
+            app:layout_constraintTop_toBottomOf="@id/SubjectField" />
+
+        <Spinner
+            android:id="@+id/DurationSpinner"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            app:layout_constraintLeft_toRightOf="@id/SubjectField"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/SubjectSpinner" />
+
+        <TextView
+            android:id="@+id/VenueField"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="Venue: "
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/guide30"
+            app:layout_constraintTop_toBottomOf="@id/DurationField" />
+
+        <Spinner
+            android:id="@+id/VenueSpinner"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            app:layout_constraintLeft_toRightOf="@id/SubjectField"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/DurationSpinner" />
+
+        <TextView
+            android:id="@+id/ProfField"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:gravity="center"
+            android:text="Professors: "
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/guide30"
+            app:layout_constraintTop_toBottomOf="@id/VenueField" />
+
+        <TextView
+            android:id="@+id/CohortField"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:gravity="center"
+            android:text="Cohorts: "
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/guide30"
+            app:layout_constraintTop_toBottomOf="@id/ProfField" />
+
+        <Button
+            android:id="@+id/SubmitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="50dp"
+            android:text="SUBMIT"
+            app:layout_constraintRight_toLeftOf="@id/guide50"
+            app:layout_constraintTop_toBottomOf="@id/buttonrow" />
+
+        <Button
+            android:id="@+id/CancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="Cancel"
+            app:layout_constraintLeft_toRightOf="@id/guide50"
+            app:layout_constraintTop_toBottomOf="@id/buttonrow"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/buttonrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.8"/>
+
+        <Button
+            android:id="@+id/ProfPick"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#00DDFF"
+            android:text="Assign Professors"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            app:layout_constraintBottom_toBottomOf="@id/ProfField"
+            app:layout_constraintLeft_toRightOf="@id/ProfField"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/VenueField" />
+
+        <Button
+            android:id="@+id/CohortPick"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:text="Assign Cohorts"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            app:layout_constraintBottom_toBottomOf="@id/CohortField"
+            app:layout_constraintLeft_toRightOf="@id/CohortField"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ProfField" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

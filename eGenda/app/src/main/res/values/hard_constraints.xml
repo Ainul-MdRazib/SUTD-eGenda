@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="istd_profs" translatable="false">
+        <item></item>
+        <item>Oka Kurniawan</item>
+        <item>Natalie Agus</item>
+        <item>Sudipta</item>
+        <item>Tony</item>
+        <item>Norman</item>
+        <item>Ngai-Man</item>
+        <item>Oliver</item>
+    </string-array>
+
+    <string-array name="term5cohorts">
+        <item>istdt5c1</item>
+        <item>istdt5c2</item>
+        <item>istdt5c3</item>
+        <item>esdt5c1</item>
+        <item>esdt5c2</item>
+        <item>epdt5c1</item>
+        <item>epdt5c2</item>
+    </string-array>
+    <string-array name="subject_pick" translatable="false">
+        <item></item>
+        <item>dummy_subj0</item>
+        <item>dummy_subj1</item>
+        <item>dummy_subj2</item>
+    </string-array>
+    <string-array name="duration_pick" translatable="false">
+        <item></item>
+        <item>1.5</item>
+        <item>2.0</item>
+        <item>2.5</item>
+        <item>3.0</item>
+    </string-array>
+    <string-array name="venue_pick" translatable="false">
+        <item></item>
+        <item>Lecture Theatre</item>
+        <item>Cohort Classroom</item>
+        <item>Lab</item>
+    </string-array>
+</resources>

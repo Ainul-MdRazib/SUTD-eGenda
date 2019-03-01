@@ -7,7 +7,7 @@
     tools:context=".Activities.LoginActivity">
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/LoginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -18,10 +18,10 @@
         android:text="Log In"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/PassField" />
 
     <EditText
-        android:id="@+id/editTextUsername"
+        android:id="@+id/EmailField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -30,15 +30,15 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="72dp"
         android:ems="10"
-        android:hint="Username"
-        android:inputType="none"
+        android:hint="Email address"
+        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/LoginTitle" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/PassField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -52,10 +52,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/EmailField" />
 
     <TextView
-        android:id="@+id/textViewTitle"
+        android:id="@+id/LoginTitle"
         android:layout_width="157dp"
         android:layout_height="53dp"
         android:layout_marginEnd="8dp"
