@@ -21,8 +21,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.khaisheen.egenda.R;
 
-import org.w3c.dom.Text;
-
 // Main page
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     Button ViewSchButton;
     Button AddSubjButton;
     Button LogOutButton;
+    Button MyLessonsButton;
+    Button ConstraintsButton;
 
     SharedPreferences mPrefs;
     SharedPreferences.Editor mPrefEditor;
@@ -99,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
         AddSubjButton = findViewById(R.id.AddSubjButton);
         ViewSchButton = findViewById(R.id.ViewSchButton);
         LogOutButton = findViewById(R.id.LogOutButton);
+        MyLessonsButton = findViewById(R.id.MyLessonsButton);
+        ConstraintsButton = findViewById(R.id.ConstraintsButton);
 
         /* Go to viewscheduleactivity */
         ViewSchButton.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +114,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, AddCourseActivity.class));
+            }
+        });
+
+        MyLessonsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, LessonsActivity.class));
+            }
+        });
+
+        ConstraintsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ConstraintsActivity.class));
             }
         });
 

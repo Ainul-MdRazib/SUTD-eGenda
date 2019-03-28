@@ -39,4 +39,53 @@
         <item>Cohort Classroom</item>
         <item>Lab</item>
     </string-array>
+    <string-array name="constraint_day">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+    </string-array>
+    <string-array name="constraint_start_time">
+        <item>8:30</item>
+        <item>9:00</item>
+        <item>9:30</item>
+        <item>10:00</item>
+        <item>10:30</item>
+        <item>11:00</item>
+        <item>11:30</item>
+        <item>12:00</item>
+        <item>12:30</item>
+        <item>13:00</item>
+        <item>13:30</item>
+        <item>14:00</item>
+        <item>14:30</item>
+        <item>15:00</item>
+        <item>15:30</item>
+        <item>16:00</item>
+        <item>16:30</item>
+        <item>17:00</item>
+        <item>17:30</item>
+    </string-array>
+    <string-array name="constraint_duration">
+        <item>0.5</item>
+        <item>1.0</item>
+        <item>1.5</item>
+        <item>2.0</item>
+        <item>2.5</item>
+        <item>3.0</item>
+        <item>3.5</item>
+        <item>4.0</item>
+        <item>4.5</item>
+        <item>5.0</item>
+        <item>5.5</item>
+        <item>6.0</item>
+        <item>6.5</item>
+        <item>7.0</item>
+        <item>7.5</item>
+        <item>8.0</item>
+        <item>8.5</item>
+        <item>9.0</item>
+        <item>9.5</item>
+    </string-array>
 </resources>

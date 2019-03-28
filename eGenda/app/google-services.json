@@ -59,11 +59,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "40979190309-iihlc3apbfn3rn4jqc4m8ifmhkb977jf.apps.googleusercontent.com",
+          "client_id": "40979190309-8hs2vtllv8lv4a4shuh9jvta98kajvm9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.khaisheen.egenda",
-            "certificate_hash": "1902c675276c887c564bcb057e94b99bc0a83825"
+            "certificate_hash": "87378f13bbda75a57bcb9d6989026f05726b59de"
           }
         },
         {

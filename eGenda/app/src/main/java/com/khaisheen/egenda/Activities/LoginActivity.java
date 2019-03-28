@@ -54,8 +54,10 @@ public class LoginActivity extends AppCompatActivity {
 
         if(currentUser == null){
             Toast.makeText(LoginActivity.this, "Please sign in with your sutd.edu.sg email.",Toast.LENGTH_LONG).show();
+            System.out.println("No login");
         }
         else{
+            System.out.println(currentUser.getEmail() + " is logged in.");
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
         }
 

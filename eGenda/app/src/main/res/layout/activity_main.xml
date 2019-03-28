@@ -27,7 +27,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="40dp"
         android:text="View Schedule"
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,9 +35,23 @@
         app:layout_constraintTop_toBottomOf="@+id/MainGreeting" />
 
     <Button
+        android:id="@+id/MyLessonsButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="My Lessons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AddSubjButton" />
+
+    <Button
         android:id="@+id/LogOutButton"
         android:layout_width="200dp"
-        android:layout_height="49dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -46,7 +60,7 @@
         android:text="Log Out"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AddSubjButton" />
+        app:layout_constraintTop_toBottomOf="@+id/ConstraintsButton" />
 
     <Button
         android:id="@+id/AddSubjButton"
@@ -61,5 +75,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ViewSchButton" />
+
+    <Button
+        android:id="@+id/ConstraintsButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Constraints"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MyLessonsButton" />
 
 </android.support.constraint.ConstraintLayout>

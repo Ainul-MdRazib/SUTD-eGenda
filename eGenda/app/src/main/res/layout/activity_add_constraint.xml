@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.AddCourseActivity">
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Add New Constraint"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/simpleProgressBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/AddCourseGreeting"
+        app:layout_constraintLeft_toLeftOf="parent"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/courseFrame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintVertical_bias="0.0">
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guide30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guide50"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/DayField"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="Day:"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/guide30"
+            app:layout_constraintTop_toTopOf="@id/courseFrame" />
+
+        <Spinner
+            android:id="@+id/daySpinner"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guide30"
+            app:layout_constraintTop_toTopOf="@id/courseFrame" />
+
+        <TextView
+            android:id="@+id/startTimeField"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="Start Time:"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/guide30"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/DayField" />
+
+        <Spinner
+            android:id="@+id/startTimeSpinner"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guide30"
+            app:layout_constraintTop_toBottomOf="@+id/daySpinner" />
+
+        <TextView
+            android:id="@+id/cDurationField"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:gravity="center"
+            android:text="Duration:"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/guide30"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/startTimeField" />
+
+        <Spinner
+            android:id="@+id/cDurationSpinner"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guide30"
+            app:layout_constraintTop_toBottomOf="@+id/startTimeSpinner" />
+
+        <Button
+            android:id="@+id/SubmitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="50dp"
+            android:text="SUBMIT"
+            app:layout_constraintRight_toLeftOf="@id/guide50"
+            app:layout_constraintTop_toBottomOf="@id/buttonrow" />
+
+        <Button
+            android:id="@+id/CancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="Cancel"
+            app:layout_constraintLeft_toRightOf="@id/guide50"
+            app:layout_constraintTop_toBottomOf="@id/buttonrow" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/buttonrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.8" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>
