@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="istd_profs" translatable="false">
+        <item></item>
+        <item>Oka Kurniawan</item>
+        <item>Natalie Agus</item>
+        <item>Sudipta</item>
+        <item>Tony</item>
+        <item>Norman</item>
+        <item>Ngai-Man</item>
+        <item>Oliver</item>
+    </string-array>
+
+    <string-array name="term5cohorts">
+        <item>istdt5c1</item>
+        <item>istdt5c2</item>
+        <item>istdt5c3</item>
+        <item>esdt5c1</item>
+        <item>esdt5c2</item>
+        <item>epdt5c1</item>
+        <item>epdt5c2</item>
+    </string-array>
+    <string-array name="subject_pick" translatable="false">
+        <item></item>
+        <item>dummy_subj0</item>
+        <item>dummy_subj1</item>
+        <item>dummy_subj2</item>
+    </string-array>
+    <string-array name="duration_pick" translatable="false">
+        <item></item>
+        <item>1.5</item>
+        <item>2.0</item>
+        <item>2.5</item>
+        <item>3.0</item>
+    </string-array>
+    <string-array name="venue_pick" translatable="false">
+        <item></item>
+        <item>Lecture Theatre</item>
+        <item>Cohort Classroom</item>
+        <item>Lab</item>
+    </string-array>
+    <string-array name="constraint_day">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+    </string-array>
+    <string-array name="constraint_start_time">
+        <item>8:30</item>
+        <item>9:00</item>
+        <item>9:30</item>
+        <item>10:00</item>
+        <item>10:30</item>
+        <item>11:00</item>
+        <item>11:30</item>
+        <item>12:00</item>
+        <item>12:30</item>
+        <item>13:00</item>
+        <item>13:30</item>
+        <item>14:00</item>
+        <item>14:30</item>
+        <item>15:00</item>
+        <item>15:30</item>
+        <item>16:00</item>
+        <item>16:30</item>
+        <item>17:00</item>
+        <item>17:30</item>
+    </string-array>
+    <string-array name="constraint_duration">
+        <item>0.5</item>
+        <item>1.0</item>
+        <item>1.5</item>
+        <item>2.0</item>
+        <item>2.5</item>
+        <item>3.0</item>
+        <item>3.5</item>
+        <item>4.0</item>
+        <item>4.5</item>
+        <item>5.0</item>
+        <item>5.5</item>
+        <item>6.0</item>
+        <item>6.5</item>
+        <item>7.0</item>
+        <item>7.5</item>
+        <item>8.0</item>
+        <item>8.5</item>
+        <item>9.0</item>
+        <item>9.5</item>
+    </string-array>
+</resources>
