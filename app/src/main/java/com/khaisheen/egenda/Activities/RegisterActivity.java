@@ -73,6 +73,11 @@ public class RegisterActivity extends AppCompatActivity{
                                     Toast.makeText(RegisterActivity.this, "Congratulations! Logging you in...",
                                             Toast.LENGTH_LONG).show();
                                     mAuth.signInWithEmailAndPassword(mEmail,mPass);
+                                    try {
+                                        Thread.sleep(2000);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
                                     startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                                     finish();
                                 } else {

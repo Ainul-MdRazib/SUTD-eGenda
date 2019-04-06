@@ -7,12 +7,13 @@
     android:layout_height="wrap_content">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/message_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:paddingLeft="15dp"
+        android:paddingRight="100dp"
         android:paddingTop="15dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/message_sentBy"
@@ -20,34 +21,30 @@
             android:layout_height="wrap_content"
             android:text="booga"
             app:layout_constraintBottom_toTopOf="@id/message_text_layout"
-            app:layout_constraintLeft_toLeftOf="@id/message_text_layout"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="spread_inside" />
+            app:layout_constraintLeft_toLeftOf="@id/message_container"
+            app:layout_constraintTop_toTopOf="@id/message_container"/>
 
         <TextView
             android:id="@+id/message_text_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="20dp"
             android:background="@drawable/single_message_bg"
-            android:gravity="center_vertical"
+            android:minWidth="100dp"
             android:padding="10dp"
-            android:text="TextView"
+            android:text="no"
             android:textSize="14sp"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="@id/message_timestamp"
-            app:layout_constraintRight_toRightOf="@id/message_timestamp"
-            app:layout_constraintStart_toStartOf="parent"
-
-            app:layout_constraintTop_toTopOf="@id/message_sentBy" />
+            app:layout_constraintRight_toRightOf="@id/message_container"
+            app:layout_constraintTop_toBottomOf="@id/message_sentBy" />
 
         <TextView
             android:id="@+id/message_timestamp"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="00:00"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
             android:gravity="right"
-            app:layout_constraintLeft_toLeftOf="@id/message_text_layout"
+            android:text="00:00"
+            app:layout_constraintRight_toRightOf="@+id/message_text_layout"
             app:layout_constraintTop_toBottomOf="@id/message_text_layout" />
     </android.support.constraint.ConstraintLayout>
 
