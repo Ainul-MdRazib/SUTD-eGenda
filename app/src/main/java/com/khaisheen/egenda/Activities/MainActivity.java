@@ -12,17 +12,28 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.khaisheen.egenda.Data.Constraint;
+import com.khaisheen.egenda.Data.Lesson;
 import com.khaisheen.egenda.R;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 // Main page
 public class MainActivity extends AppCompatActivity {
+
+    public static ArrayList<Constraint> CONSTRAINTS = new ArrayList<>();
+    public static ArrayList<Lesson> LESSONS = new ArrayList<>();
 
     FirebaseAuth mAuth;
 
@@ -43,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
     String TAG = "100";
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        refreshConstraints();
+        refreshLessons();
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -50,12 +69,15 @@ public class MainActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(MainActivity.this);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
-        String userEmail = user.getEmail().toString();
+
+
 
         MainGreeting = findViewById(R.id.MainGreeting);
         MainGreeting.setText("");
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
         db.collection("professors")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -133,5 +155,68 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void refreshConstraints(){
+        CONSTRAINTS = new ArrayList<>();
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        String username = user.getDisplayName();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        /* CONSTRAINTS */
+
+        db.collection("prof_constraints").document(username).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot document) {
+                for(Map.Entry<String, Object> e: document.getData().entrySet()){
+                    HashMap<String, String> m = (HashMap<String, String>) e.getValue();
+                    String day = e.getKey();
+                    String duration = m.get("duration");
+                    String startTime = m.get("startTime");
+                    Constraint c = new Constraint(day, startTime, duration);
+                    CONSTRAINTS.add(c);
+                }
+            }
+        });
+    }
+
+
+    private void refreshLessons() {
+        LESSONS = new ArrayList<>();
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        String username = user.getDisplayName();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        /* CONSTRAINTS */
+
+        db.collection("lessons").document(username).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot document) {
+                for(Map.Entry<String, Object> e: document.getData().entrySet()){
+                    HashMap<String, Object> m = (HashMap<String, Object>) e.getValue();
+                    String id = e.getKey();
+                    String subject = (String) m.get("subject");
+                    String location = (String) m.get("location");
+                    ArrayList cohorts = (ArrayList) m.get("cohorts");
+                    ArrayList profs = getProfsFrom(m);
+                    String duration = (String) m.get("duration");
+                    Lesson l = new Lesson(subject,location,cohorts,profs,duration,id);
+                    LESSONS.add(l);
+                }
+            }
+        });
+    }
+
+    private ArrayList<String> getProfsFrom (HashMap m){
+        ArrayList<String> out = new ArrayList<>();
+        if(m.containsKey("shared")){
+            out = (ArrayList<String>) m.get("shared");
+        }
+        else{
+            out.add("myself");
+        }
+        return out;
     }
 }

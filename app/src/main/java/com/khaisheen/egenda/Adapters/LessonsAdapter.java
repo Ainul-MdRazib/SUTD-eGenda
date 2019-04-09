@@ -9,24 +9,42 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.khaisheen.egenda.Data.Lesson;
 import com.khaisheen.egenda.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+
+import static com.khaisheen.egenda.Activities.MainActivity.LESSONS;
 
 public class LessonsAdapter extends RecyclerView.Adapter {
 
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    ArrayList<Lesson> lessons;
     /* DUMMY DATA */
     ArrayList<String> dummyCohorts = new ArrayList<>(Arrays.asList("istdt5c1", "istdt5c2", "istdt5c3"));
     ArrayList<String> dummyProfs = new ArrayList<>(Arrays.asList("David", "Natalie"));
-    ArrayList<Lesson> lessons = new ArrayList<Lesson>(Arrays.asList(
-            new Lesson("CSE", "lt", dummyCohorts, dummyProfs, 4),
-            new Lesson("CSE", "lt", dummyCohorts, dummyProfs, 4),
-            new Lesson("CSE", "lt", dummyCohorts, dummyProfs, 4),
-            new Lesson("CSE", "lt", dummyCohorts, dummyProfs, 4),
-            new Lesson("CSE", "lt", dummyCohorts, dummyProfs, 4)
-    ));
+//    ArrayList<Lesson> lessons = new ArrayList<Lesson>(Arrays.asList(
+//            new Lesson("CSE", "lt", dummyCohorts, dummyProfs, 4),
+//            new Lesson("CSE", "lt", dummyCohorts, dummyProfs, 4),
+//            new Lesson("CSE", "lt", dummyCohorts, dummyProfs, 4),
+//            new Lesson("CSE", "lt", dummyCohorts, dummyProfs, 4),
+//            new Lesson("CSE", "lt", dummyCohorts, dummyProfs, 4)
+//    ));
+
+    public LessonsAdapter(ArrayList<Lesson> lessons) {
+        this.lessons = lessons;
+    }
     // TODO: make a new 'lessons' arraylist by pulling lessons data from firebase.
 
     @NonNull
@@ -41,11 +59,11 @@ public class LessonsAdapter extends RecyclerView.Adapter {
         LessonsViewHolder holder = (LessonsViewHolder) viewHolder;
         holder.tvLesson.setText("Lesson " + String.valueOf(i+1));
         Lesson l = lessons.get(i);
-        holder.tvSubjectName.setText(l.subject);
-        holder.tvCohortIds.setText(l.cohorts.toString());
-        holder.tvDurationValue.setText(String.valueOf(l.duration));
-        holder.tvLocation.setText(l.location);
-        holder.tvProfs.setText(l.profs.toString());
+        holder.tvSubjectName.setText(l.getSubject());
+        holder.tvCohortIds.setText(l.getCohorts().toString());
+        holder.tvDurationValue.setText(String.valueOf(l.getDuration()));
+        holder.tvLocation.setText(l.getLocation());
+        holder.tvProfs.setText(l.getProfs().toString());
     }
 
     @Override
@@ -73,6 +91,9 @@ public class LessonsAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     // TODO: get lesson id and remove the entry from firebase
+                    String id = lessons.get(getAdapterPosition()).getId();
+                    removeLesson(id);
+
                     lessons.remove(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
                     notifyItemRangeChanged(0, lessons.size());
@@ -81,19 +102,38 @@ public class LessonsAdapter extends RecyclerView.Adapter {
         }
     }
 
-    class Lesson{
-        String subject, location;
-        ArrayList<String> cohorts, profs;
-        int duration, id;
+    private void removeLesson(String id){
+        String username = mAuth.getCurrentUser().getDisplayName();
+        DocumentReference docRef = db.collection("lessons").document(username);
+        Map<String, Object> updates = new HashMap<>();
+        updates.put(id, FieldValue.delete());
 
-        public Lesson(String subject, String location, ArrayList<String> cohorts, ArrayList<String> profs, int duration) {
-            Random r = new Random();
-            id = r.nextInt(10000000);
-            this.subject = subject;
-            this.location = location;
-            this.cohorts = cohorts;
-            this.profs = profs;
-            this.duration = duration;
-        }
+        docRef.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    System.out.println("Removed lesson from fb");
+                }
+                else{
+                    System.out.println("Remove failed");
+                }
+            }
+        });
     }
+    
+//    class Lesson{
+//        String subject, location;
+//        ArrayList<String> cohorts, profs;
+//        int duration, id;
+//
+//        public Lesson(String subject, String location, ArrayList<String> cohorts, ArrayList<String> profs, int duration) {
+//            Random r = new Random();
+//            id = r.nextInt(10000000);
+//            this.subject = subject;
+//            this.location = location;
+//            this.cohorts = cohorts;
+//            this.profs = profs;
+//            this.duration = duration;
+//        }
+//    }
 }

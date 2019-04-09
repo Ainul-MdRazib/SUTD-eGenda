@@ -21,8 +21,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+import com.khaisheen.egenda.Data.Constraint;
+import com.khaisheen.egenda.Data.Lesson;
 import com.khaisheen.egenda.R;
 
 import java.util.ArrayList;
@@ -30,9 +33,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+
+import static com.khaisheen.egenda.Activities.MainActivity.CONSTRAINTS;
+import static com.khaisheen.egenda.Activities.MainActivity.LESSONS;
 
 
 public class AddCourseActivity extends AppCompatActivity{
+    final String alnumCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
     private Button SubmitButton;
     private Button CancelButton;
@@ -211,26 +219,35 @@ public class AddCourseActivity extends AppCompatActivity{
                 String mVenue = VenueSpinner.getSelectedItem().toString();
                 String[] mProfList = ProfPick.getText().toString().split(", ");
                 String[] mCohortList = CohortPick.getText().toString().split(", ");
+                String id = generateId();
 
-                if(mSubject.equals("")|mDuration.equals("")|mVenue.equals("")){
+                boolean cohortEmpty = mCohortList[0].equalsIgnoreCase("Assign Cohorts");
+                boolean profsEmpty = mProfList[0].equalsIgnoreCase("Assign Professors");
+                if(mSubject.equals("")||mDuration.equals("")||mVenue.equals("")||cohortEmpty||profsEmpty){
                     Toast.makeText(AddCourseActivity.this, "Please fill out all sections.", Toast.LENGTH_LONG).show();
                 }else{
 
                     setProgressValue(progress);
 
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
                     Map<String, Object> newCourse = new HashMap<>();
-                    newCourse.put("name", mSubject);
                     newCourse.put("duration", mDuration);
-                    newCourse.put("venue", mVenue);
-                    newCourse.put("profs", Arrays.asList(mProfList));
-                    newCourse.put("cohorts", Arrays.asList(mCohortList));
+                    newCourse.put("location", mVenue);
+
+                    putProfs(newCourse,mProfList);
+
+                    newCourse.put("cohorts", new ArrayList<>(Arrays.asList(mCohortList)));
+                    newCourse.put("subject", mSubject);
 
                     Map<String, Object> docData = new HashMap<>();
-                    docData.put(mSubject,newCourse);
+                    docData.put(id,newCourse);
+                    Lesson l = new Lesson(mSubject,mVenue,new ArrayList<>(Arrays.asList(mCohortList)),new ArrayList<>(Arrays.asList(mProfList)),mDuration,id);
+                    LESSONS.add(l);
 
-                    db.collection("pillar").document(pillar)
+                    String username = mAuth.getCurrentUser().getDisplayName();
+                    db.collection("lessons").document(username)
                             .set(docData, SetOptions.merge())
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -281,6 +298,22 @@ public class AddCourseActivity extends AppCompatActivity{
             }
         });
         thread.start();
+    }
+
+    private String generateId(){
+        Random r = new Random();
+        String out = "";
+        for(int i=0; i<8; i++){
+            out += alnumCharacters.charAt(r.nextInt(alnumCharacters.length()));
+        }
+        return out;
+    }
+
+    private void putProfs(Map<String,Object> newCourse, String[] mProfList){
+        ArrayList<String> tempProfList = new ArrayList<>(Arrays.asList(mProfList));
+        if(tempProfList.size() > 1){
+            newCourse.put("shared",tempProfList);
+        }
     }
 
 }

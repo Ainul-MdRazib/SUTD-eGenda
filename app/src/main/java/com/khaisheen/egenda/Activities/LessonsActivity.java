@@ -11,6 +11,8 @@ import android.widget.Button;
 import com.khaisheen.egenda.Adapters.LessonsAdapter;
 import com.khaisheen.egenda.R;
 
+import static com.khaisheen.egenda.Activities.MainActivity.LESSONS;
+
 public class LessonsActivity extends Activity {
 
     RecyclerView rvClasses;
@@ -18,12 +20,17 @@ public class LessonsActivity extends Activity {
     Button BackButton;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        rvClasses.setAdapter(new LessonsAdapter(LESSONS));
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lessons);
         rvClasses = findViewById(R.id.rvClasses);
         rvClasses.setLayoutManager(new LinearLayoutManager(this));
-        rvClasses.setAdapter(new LessonsAdapter());
 
         AddLessonButton = findViewById(R.id.AddLessonButton);
         BackButton = findViewById(R.id.LessonsButtonBack);

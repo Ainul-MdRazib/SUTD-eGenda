@@ -7,28 +7,42 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.khaisheen.egenda.Activities.ConstraintsActivity;
+import com.khaisheen.egenda.Data.Constraint;
 import com.khaisheen.egenda.R;
 
+import java.io.ObjectStreamException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class ConstraintsAdapter extends RecyclerView.Adapter {
 
-    /* DUMMY DATA */
-    ArrayList<Constraint> constraints = new ArrayList<>(Arrays.asList(
-            new Constraint("Monday", 0, 19),
-            new Constraint("Wednesday", 8, 4),
-            new Constraint("Friday", 4, 4)
-    ));
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    ArrayList<Constraint> constraints;
 
-    // TODO: pull constraints data from firebase and make new 'constraints' arraylist
+    public ConstraintsAdapter(ArrayList<Constraint> constraints) {
+        this.constraints = constraints;
+    }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        System.out.println("Constraints: " + constraints);
         return new ConstraintsViewHolder(LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.constraint_card, viewGroup, false));
     }
@@ -38,9 +52,9 @@ public class ConstraintsAdapter extends RecyclerView.Adapter {
         ConstraintsViewHolder holder = (ConstraintsViewHolder) viewHolder;
         Constraint c = constraints.get(i);
         holder.tvConstraint.setText("Constraint " + String.valueOf(i+1));
-        holder.tvDay.setText(c.day);
-        holder.tvStartTime.setText(String.valueOf(c.startTime));
-        holder.tvDurationConstraint.setText(String.valueOf(c.duration));
+        holder.tvDay.setText(c.getDay());
+        holder.tvStartTime.setText(c.getStartTime());
+        holder.tvDurationConstraint.setText(c.getDuration());
     }
 
     @Override
@@ -65,6 +79,9 @@ public class ConstraintsAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     // TODO: get constraint id and remove entry from firebase
+                    String constraintDay = tvDay.getText().toString();
+                    removeConstraint(constraintDay);
+
                     constraints.remove(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
                     notifyItemRangeChanged(0, constraints.size());
@@ -73,18 +90,22 @@ public class ConstraintsAdapter extends RecyclerView.Adapter {
         }
     }
 
-    class Constraint {
-        String day;
-        int startTime; // 0 = 8.30, 1 = 9.00, ... 18 = 17.30
-        int duration; // 1 = 30min, range from 1 to 19
-        int id;
+    public void removeConstraint(String day){
+        String username = mAuth.getCurrentUser().getDisplayName();
+        DocumentReference docRef = db.collection("prof_constraints").document(username);
+        Map<String, Object> updates = new HashMap<>();
+        updates.put(day, FieldValue.delete());
 
-        public Constraint(String day, int startTime, int duration) {
-            Random r = new Random();
-            id = r.nextInt(10000000);
-            this.day = day;
-            this.startTime = startTime;
-            this.duration = duration;
-        }
+        docRef.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    System.out.println("Removed constraint form fb");
+                }
+                else{
+                    System.out.println("Remove failed");
+                }
+            }
+        });
     }
 }

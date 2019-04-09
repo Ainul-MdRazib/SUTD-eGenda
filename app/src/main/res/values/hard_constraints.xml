@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="istd_profs" translatable="false">
-        <item></item>
         <item>Oka Kurniawan</item>
         <item>Natalie Agus</item>
         <item>Sudipta</item>
@@ -22,9 +21,10 @@
     </string-array>
     <string-array name="subject_pick" translatable="false">
         <item></item>
-        <item>dummy_subj0</item>
-        <item>dummy_subj1</item>
-        <item>dummy_subj2</item>
+        <item>50.003</item>
+        <item>50.005</item>
+        <item>50.034</item>
+        <item>30.007</item>
     </string-array>
     <string-array name="duration_pick" translatable="false">
         <item></item>
