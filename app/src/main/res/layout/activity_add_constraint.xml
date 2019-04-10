@@ -92,7 +92,7 @@
             android:layout_width="0dp"
             android:layout_height="42dp"
             android:gravity="center"
-            android:text="Duration:"
+            android:text="Duration (hrs):"
             android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/guide30"
             app:layout_constraintHorizontal_bias="0.0"

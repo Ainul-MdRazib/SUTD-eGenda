@@ -34,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
 
     public static ArrayList<Constraint> CONSTRAINTS = new ArrayList<>();
     public static ArrayList<Lesson> LESSONS = new ArrayList<>();
+    public static final HashMap<String,String> START_TIME_MAP = new HashMap<String,String>(){{
+        put("8:30","0");put("9:00","2");put("9:30","3");put("10:00","4");
+        put("10:30","5");put("11:00","6");put("11:30","7");put("12:00","8");
+        put("12:30","9");put("13:00","10");put("13:30","11");put("14:00","12");
+        put("14:30","13");put("15:00","14");put("15:30","15");put("16:00","16");
+        put("16:30","17");put("17:00","18");put("17:30","19");
+    }};
 
     FirebaseAuth mAuth;
 
@@ -103,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        AddSubjButton = findViewById(R.id.AddSubjButton);
+//        AddSubjButton = findViewById(R.id.AddSubjButton);
         ViewSchButton = findViewById(R.id.ViewSchButton);
         LogOutButton = findViewById(R.id.LogOutButton);
         MyLessonsButton = findViewById(R.id.MyLessonsButton);
@@ -118,12 +125,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         /* Go to addsubjectactivity */
-        AddSubjButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AddCourseActivity.class));
-            }
-        });
+//        AddSubjButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(MainActivity.this, AddCourseActivity.class));
+//            }
+//        });
 
         MyLessonsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,16 +171,14 @@ public class MainActivity extends AppCompatActivity {
         String username = user.getDisplayName();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        /* CONSTRAINTS */
-
         db.collection("prof_constraints").document(username).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot document) {
                 for(Map.Entry<String, Object> e: document.getData().entrySet()){
                     HashMap<String, String> m = (HashMap<String, String>) e.getValue();
                     String day = e.getKey();
-                    String duration = m.get("duration");
-                    String startTime = m.get("startTime");
+                    String duration = getConstraintDurationFrom(m);
+                    String startTime = getStartTimeFrom(m);
                     Constraint c = new Constraint(day, startTime, duration);
                     CONSTRAINTS.add(c);
                 }
@@ -218,5 +223,22 @@ public class MainActivity extends AppCompatActivity {
             out.add("myself");
         }
         return out;
+    }
+
+    private String getStartTimeFrom(HashMap m){
+        String tempStartTime = (String) m.get("startTime");
+        String out = "";
+        for(Map.Entry e : START_TIME_MAP.entrySet()){
+            if(e.getValue().equals(tempStartTime)){
+                out += (String) e.getKey();
+            }
+        }
+        return out;
+    }
+
+    private String getConstraintDurationFrom(HashMap m){
+        String tempDuration = (String) m.get("duration");
+        double durationInHours = Double.valueOf(tempDuration) / 2;
+        return String.valueOf(durationInHours);
     }
 }

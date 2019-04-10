@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
@@ -25,6 +26,7 @@ import java.util.Map;
 import java.util.Random;
 
 import static com.khaisheen.egenda.Activities.MainActivity.CONSTRAINTS;
+import static com.khaisheen.egenda.Activities.MainActivity.START_TIME_MAP;
 
 public class AddConstraintActivity extends Activity {
 
@@ -32,13 +34,7 @@ public class AddConstraintActivity extends Activity {
     Button SubmitButton, CancelButton;
     FirebaseFirestore db;
     FirebaseAuth mAuth;
-    final HashMap<String,String> startTimeMap = new HashMap<String,String>(){{
-        put("8:30","0");put("9:00","2");put("9:30","3");put("10:00","4");
-        put("10:30","5");put("11:00","6");put("11:30","7");put("12:00","8");
-        put("12:30","9");put("13:00","10");put("13:30","11");put("14:00","12");
-        put("14:30","13");put("15:00","14");put("15:30","15");put("16:00","16");
-        put("16:30","17");put("17:00","18");put("17:30","19");
-    }};
+
 
 
     @Override
@@ -85,17 +81,22 @@ public class AddConstraintActivity extends Activity {
     }
 
     public void submitConstraints(){
-        String day = daySpinner.getSelectedItem().toString(),
-            startTime = formatStartTime(startTimeSpinner.getSelectedItem().toString()),
-            duration = formatDuration(cDurationSpinner.getSelectedItem().toString());
+        String tempDay = daySpinner.getSelectedItem().toString(),
+                tempStartTime = startTimeSpinner.getSelectedItem().toString(),
+                tempDuration = cDurationSpinner.getSelectedItem().toString();
+        String day = tempDay,
+                startTime = formatStartTime(tempStartTime),
+                duration = formatDuration(tempDuration);
         String username = mAuth.getCurrentUser().getDisplayName();
 
         Map<String,String> constraint = new HashMap<>();
         constraint.put("startTime", startTime);
         constraint.put("duration", duration);
 
-        Constraint c = new Constraint(day, startTime, duration);
-        CONSTRAINTS.add(c);
+        Constraint c = new Constraint(tempDay, tempStartTime, tempDuration);
+//        CONSTRAINTS.add(c);
+        tempNotifyConstraintAdded(c);
+
 
         Map<String, Object> docData = new HashMap<>();
         docData.put(day,constraint);
@@ -122,8 +123,21 @@ public class AddConstraintActivity extends Activity {
     };
 
     public String formatStartTime(String inp){
-        return startTimeMap.get(inp);
+        return START_TIME_MAP.get(inp);
     }
 
-
+    private void tempNotifyConstraintAdded(Constraint c){
+        boolean newConstraintOfSameDayExists = false;
+        for(Constraint existingConstraint : CONSTRAINTS){
+            if(existingConstraint.getDay().equals(c.getDay())){
+                existingConstraint.setDuration(c.getDuration());
+                existingConstraint.setStartTime(c.getStartTime());
+                newConstraintOfSameDayExists = true;
+            }
+        }
+        System.out.println("Same constraint day exits : " + newConstraintOfSameDayExists);
+        if(!newConstraintOfSameDayExists){
+            CONSTRAINTS.add(c);
+        }
+    }
 }
