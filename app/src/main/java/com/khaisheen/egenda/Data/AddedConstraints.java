@@ -28,7 +28,8 @@ public class AddedConstraints {
         if(auth.getCurrentUser() == null){
             return;
         }
-        String username = auth.getCurrentUser().getDisplayName();
+//        String username = auth.getCurrentUser().getDisplayName();
+        String username = "Booga";
         constraints = new ArrayList<>();
         if(!username.equals("")) {
             db.collection("prof_constraints").document(username).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

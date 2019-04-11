@@ -48,8 +48,7 @@ public class MainActivity extends AppCompatActivity {
 //        put("16:30","17");put("17:00","18");put("17:30","19");
 //    }};
 
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     TextView MainGreeting;
     Button ViewSchButton;
@@ -65,11 +64,16 @@ public class MainActivity extends AppCompatActivity {
     String profName = "PROFNAME";
     String profPillar = "PROFPILLAR";
 
+    FirebaseAuth mAuth;
+    FirebaseFirestore db;
+
     String TAG = "100";
 
     @Override
     protected void onResume() {
         super.onResume();
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
         addedConstraints.getFromFireStore(mAuth, db);
         addedLessons.getFromFirestore(mAuth, db);
     }
@@ -80,7 +84,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         FirebaseApp.initializeApp(MainActivity.this);
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
 
 
@@ -105,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                                 editor.putString("professor", profName);
                                 editor.putString("pillar", profPillar);
                                 editor.commit();
-                                MainGreeting.setText("Welcome back "+ mAuth.getCurrentUser().getDisplayName() + "!");
+//                                MainGreeting.setText("Welcome back "+ mAuth.getCurrentUser().getDisplayName() + "!");
                             }
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());

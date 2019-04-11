@@ -104,7 +104,7 @@ public class LessonsAdapter extends RecyclerView.Adapter {
 
     private void removeLesson(String id){
         String username = mAuth.getCurrentUser().getDisplayName();
-        DocumentReference docRef = db.collection("lessons").document(username);
+        DocumentReference docRef = db.collection("dummy").document(username);
         Map<String, Object> updates = new HashMap<>();
         updates.put(id, FieldValue.delete());
 

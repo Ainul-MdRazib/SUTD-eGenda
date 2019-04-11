@@ -88,7 +88,9 @@ public class AddConstraintActivity extends Activity {
         String day = tempDay,
                 startTime = formatStartTime(tempStartTime),
                 duration = formatDuration(tempDuration);
-        String username = mAuth.getCurrentUser().getDisplayName();
+
+//        String username = mAuth.getCurrentUser().getDisplayName();
+        String username = "Booga";
 
         Map<String,String> constraint = new HashMap<>();
         constraint.put("startTime", startTime);
@@ -99,7 +101,7 @@ public class AddConstraintActivity extends Activity {
 
 
         Map<String, Object> docData = new HashMap<>();
-        docData.put(day,constraint);
+        docData.put(day.toLowerCase(),constraint);
         db.collection("prof_constraints").document(username)
                 .set(docData,SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -119,7 +121,8 @@ public class AddConstraintActivity extends Activity {
 
     public String formatDuration(String inp) {
         double value = Double.valueOf(inp);
-        return String.valueOf(value*2);
+        int intValue = (int) value*2;
+        return String.valueOf(intValue);
     };
 
     public String formatStartTime(String inp){

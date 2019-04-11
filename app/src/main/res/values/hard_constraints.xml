@@ -37,7 +37,6 @@
         <item></item>
         <item>Lecture Theatre</item>
         <item>Cohort Classroom</item>
-        <item>Lab</item>
     </string-array>
     <string-array name="constraint_day">
         <item>Monday</item>

@@ -231,8 +231,8 @@ public class AddCourseActivity extends AppCompatActivity{
                     Lesson l = new Lesson(mSubject,mVenue,new ArrayList<>(Arrays.asList(mCohortList)),new ArrayList<>(Arrays.asList(mProfList)),mDuration);
                     Map<String, Object> newCourse = new HashMap<>();
                     newCourse.put("duration", l.getDuration());
-                    newCourse.put("location", l.getLocation());
-
+//                    newCourse.put("location", l.getLocation());
+                    putLocation(newCourse, l.getLocation());
                     putProfs(newCourse,mProfList);
 
                     newCourse.put("cohorts", new ArrayList<>(l.getCohorts()));
@@ -243,8 +243,9 @@ public class AddCourseActivity extends AppCompatActivity{
 
                     AddedLessons.getInstance().addLesson(l);
 
-                    String username = mAuth.getCurrentUser().getDisplayName();
-                    db.collection("lessons").document(username)
+//                    String username = mAuth.getCurrentUser().getDisplayName();
+                    String username = "Booga";
+                    db.collection("dummy").document(username)
                             .set(docData, SetOptions.merge())
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -296,19 +297,20 @@ public class AddCourseActivity extends AppCompatActivity{
         thread.start();
     }
 
-    private String generateId(){
-        Random r = new Random();
-        String out = "";
-        for(int i=0; i<8; i++){
-            out += alnumCharacters.charAt(r.nextInt(alnumCharacters.length()));
-        }
-        return out;
-    }
 
     private void putProfs(Map<String,Object> newCourse, String[] mProfList){
         ArrayList<String> tempProfList = new ArrayList<>(Arrays.asList(mProfList));
         if(tempProfList.size() > 1){
             newCourse.put("shared",tempProfList);
+        }
+    }
+
+    private void putLocation(Map<String,Object> newCourse, String location){
+        if(location.equals("Lecture Theatre")){
+            newCourse.put("location", "lt");
+        }
+        else if(location.equals("Cohort Classroom")){
+            newCourse.put("location", "cc");
         }
     }
 

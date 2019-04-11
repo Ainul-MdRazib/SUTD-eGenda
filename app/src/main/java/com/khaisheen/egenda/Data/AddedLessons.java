@@ -41,10 +41,11 @@ public class AddedLessons {
         if(auth.getCurrentUser() == null){
             return;
         }
-        String username = auth.getCurrentUser().getDisplayName();
+//        String username = auth.getCurrentUser().getDisplayName();
+        String username = "Booga";
         lessons = new ArrayList<>();
         if(!username.equals("")) {
-            db.collection("lessons").document(username).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            db.collection("dummy").document(username).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot document) {
                     for (Map.Entry<String, Object> e : document.getData().entrySet()) {
