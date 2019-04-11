@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         LoginButton = findViewById(R.id.LoginButton);
 
         EmailField = findViewById(R.id.EmailField);
-        PassField = findViewById(R.id.RegPassField);
+        PassField = findViewById(R.id.PassField);
 
         mProgress = new ProgressDialog(LoginActivity.this);
 

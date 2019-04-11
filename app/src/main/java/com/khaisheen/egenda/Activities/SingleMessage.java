@@ -11,6 +11,10 @@ public class SingleMessage {
     private Timestamp timestamp;
     private String message;
 
+    public SingleMessage(){
+
+    }
+
     public SingleMessage(String sentBy, Timestamp timestamp, String message){
         this.message = message;
         this.sentBy = sentBy;

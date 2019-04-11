@@ -1,4 +1,4 @@
-package com.khaisheen.egenda;
+package com.khaisheen.egenda.Activities;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -6,6 +6,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +20,7 @@ import static org.junit.Assert.assertNotNull;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class ExampleInstrumentedTest {
+public class BackEndLoginTest {
     @Test
     public void useAppContext() {
         // Context of the app under test.
@@ -39,13 +40,32 @@ public class ExampleInstrumentedTest {
         FirebaseApp.initializeApp(InstrumentationRegistry.getTargetContext());
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        mAuth.signInWithEmailAndPassword("booga@sutd.edu.sg","boogaboo");
-        Thread.sleep(5000);
-        String idTest = mAuth.getCurrentUser().getUid();
+        if(mAuth.getCurrentUser() != null){
+            mAuth.signOut();
+        }
 
-        assertNotNull(idTest);
+        mAuth.signInWithEmailAndPassword("booga@sutd.edu.sg","boogaboo");
+        Thread.sleep(2000);
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        assertNotNull(user);
     }
 
+    @Test
+    public void FBBadLogin() throws InterruptedException {
+        FirebaseApp.initializeApp(InstrumentationRegistry.getTargetContext());
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        if(mAuth.getCurrentUser() != null){
+            mAuth.signOut();
+        }
+
+        mAuth.signInWithEmailAndPassword("booga@email.sg","boogaboo");
+        Thread.sleep(2000);
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        assertNotNull(user);
+    }
 
 
 

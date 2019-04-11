@@ -1,10 +1,9 @@
-package com.khaisheen.egenda;
+package com.khaisheen.egenda.Activities;
 
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.support.test.rule.ActivityTestRule;
 
-import com.khaisheen.egenda.Activities.AddCourseActivity;
 import com.khaisheen.egenda.R;
 
 import org.junit.After;
@@ -16,7 +15,9 @@ import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class AddCourseActivityTest {
 

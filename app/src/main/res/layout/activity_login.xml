@@ -18,7 +18,7 @@
         android:text="Log In"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegPassField" />
+        app:layout_constraintTop_toBottomOf="@+id/PassField" />
 
     <EditText
         android:id="@+id/EmailField"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/LoginTitle" />
 
     <EditText
-        android:id="@+id/RegPassField"
+        android:id="@+id/PassField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"

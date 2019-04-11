@@ -21,12 +21,13 @@ public class MainActivityTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<MainActivity>(MainActivity.class);
-
     private MainActivity mActivity = null;
     Activity activity;
 
     Instrumentation.ActivityMonitor viewSchedMonitor = getInstrumentation().addMonitor(ViewScheduleActivity.class.getName(),null,false);
-    Instrumentation.ActivityMonitor addCourseMonitor = getInstrumentation().addMonitor(AddCourseActivity.class.getName(),null, false);
+    Instrumentation.ActivityMonitor lessonMonitor = getInstrumentation().addMonitor(LessonsActivity.class.getName(),null, false);
+    Instrumentation.ActivityMonitor constraintMonitor = getInstrumentation().addMonitor(ConstraintsActivity.class.getName(),null,false);
+    Instrumentation.ActivityMonitor chatMonitor = getInstrumentation().addMonitor(ChatActivity.class.getName(),null,false);
     Instrumentation.ActivityMonitor logOutMonitor = getInstrumentation().addMonitor(LoginActivity.class.getName(),null,false);
 
     @Before
@@ -39,8 +40,12 @@ public class MainActivityTest {
     @Test
     public void testAllViewsExist(){
         assertNotNull(mActivity.findViewById(R.id.MainGreeting));
+
         assertNotNull(mActivity.findViewById(R.id.ViewSchButton));
         assertNotNull(mActivity.findViewById(R.id.LogOutButton));
+        assertNotNull(mActivity.findViewById(R.id.MyLessonsButton));
+        assertNotNull(mActivity.findViewById(R.id.ConstraintsButton));
+        assertNotNull(mActivity.findViewById(R.id.ChatButton));
 
     }
 
@@ -55,15 +60,32 @@ public class MainActivityTest {
 
     }
 
-    /*
     @Test
-    public void testAddCourseActivityAccess(){
+    public void testLessonActivityAccess(){
 
-        onView(withId(R.id.AddSubjButton)).perform(click());
-        activity = getInstrumentation().waitForMonitorWithTimeout(addCourseMonitor, 5000);
+        onView(withId(R.id.MyLessonsButton)).perform(click());
+        activity = getInstrumentation().waitForMonitorWithTimeout(lessonMonitor, 5000);
         assertNotNull(activity);
 
-    }*/
+    }
+
+    @Test
+    public void testConstraintActivityAccess(){
+
+        onView(withId(R.id.ConstraintsButton)).perform(click());
+        activity = getInstrumentation().waitForMonitorWithTimeout(constraintMonitor, 5000);
+        assertNotNull(activity);
+
+    }
+
+    @Test
+    public void testChatActivityAccess(){
+
+        onView(withId(R.id.ChatButton)).perform(click());
+        activity = getInstrumentation().waitForMonitorWithTimeout(chatMonitor, 5000);
+        assertNotNull(activity);
+
+    }
 
     @Test
     public void testLogOut(){
