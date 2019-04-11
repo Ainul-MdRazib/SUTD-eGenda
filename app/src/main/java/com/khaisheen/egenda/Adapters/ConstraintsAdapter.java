@@ -92,7 +92,8 @@ public class ConstraintsAdapter extends RecyclerView.Adapter {
     }
 
     public void removeConstraint(String day){
-        String username = mAuth.getCurrentUser().getDisplayName();
+//        String username = mAuth.getCurrentUser().getDisplayName();
+        String username = "Booga";
         DocumentReference docRef = db.collection("prof_constraints").document(username);
         Map<String, Object> updates = new HashMap<>();
         updates.put(day, FieldValue.delete());

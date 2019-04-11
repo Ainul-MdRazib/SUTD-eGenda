@@ -120,8 +120,8 @@ public class AddConstraintActivity extends Activity {
     }
 
     public String formatDuration(String inp) {
-        double value = Double.valueOf(inp);
-        int intValue = (int) value*2;
+        double value = Double.valueOf(inp) * 2;
+        int intValue = (int) value;
         return String.valueOf(intValue);
     };
 
