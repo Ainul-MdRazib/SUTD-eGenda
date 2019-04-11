@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.khaisheen.egenda.Data.AddedLessons;
 import com.khaisheen.egenda.Data.Lesson;
 import com.khaisheen.egenda.R;
 
@@ -24,13 +25,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import static com.khaisheen.egenda.Activities.MainActivity.LESSONS;
 
 public class LessonsAdapter extends RecyclerView.Adapter {
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    ArrayList<Lesson> lessons;
+    AddedLessons lessons;
     /* DUMMY DATA */
     ArrayList<String> dummyCohorts = new ArrayList<>(Arrays.asList("istdt5c1", "istdt5c2", "istdt5c3"));
     ArrayList<String> dummyProfs = new ArrayList<>(Arrays.asList("David", "Natalie"));
@@ -42,7 +42,7 @@ public class LessonsAdapter extends RecyclerView.Adapter {
 //            new Lesson("CSE", "lt", dummyCohorts, dummyProfs, 4)
 //    ));
 
-    public LessonsAdapter(ArrayList<Lesson> lessons) {
+    public LessonsAdapter(AddedLessons lessons) {
         this.lessons = lessons;
     }
     // TODO: make a new 'lessons' arraylist by pulling lessons data from firebase.
@@ -120,20 +120,5 @@ public class LessonsAdapter extends RecyclerView.Adapter {
             }
         });
     }
-    
-//    class Lesson{
-//        String subject, location;
-//        ArrayList<String> cohorts, profs;
-//        int duration, id;
-//
-//        public Lesson(String subject, String location, ArrayList<String> cohorts, ArrayList<String> profs, int duration) {
-//            Random r = new Random();
-//            id = r.nextInt(10000000);
-//            this.subject = subject;
-//            this.location = location;
-//            this.cohorts = cohorts;
-//            this.profs = profs;
-//            this.duration = duration;
-//        }
-//    }
+
 }

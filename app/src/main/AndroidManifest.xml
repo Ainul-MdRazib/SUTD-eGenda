@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Activities.RegisterActivity"
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme"></activity>
         <activity
@@ -47,8 +47,8 @@
         <activity android:name=".Activities.LessonsActivity" />
         <activity android:name=".Activities.ConstraintsActivity" />
         <activity android:name=".Activities.AddConstraintActivity" />
-        <activity android:name=".Activities.RegisterActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <!--<activity android:name=".Activities.RegisterActivity"-->
+            <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>-->
     </application>
 
 </manifest>

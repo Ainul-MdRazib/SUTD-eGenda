@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+import com.khaisheen.egenda.Data.AddedLessons;
 import com.khaisheen.egenda.Data.Constraint;
 import com.khaisheen.egenda.Data.Lesson;
 import com.khaisheen.egenda.R;
@@ -34,9 +35,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
-import static com.khaisheen.egenda.Activities.MainActivity.CONSTRAINTS;
-import static com.khaisheen.egenda.Activities.MainActivity.LESSONS;
 
 
 public class AddCourseActivity extends AppCompatActivity{
@@ -61,7 +59,6 @@ public class AddCourseActivity extends AppCompatActivity{
 
     private String TAG ="101";
 
-    private String pillar = "ISTD";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -219,7 +216,7 @@ public class AddCourseActivity extends AppCompatActivity{
                 String mVenue = VenueSpinner.getSelectedItem().toString();
                 String[] mProfList = ProfPick.getText().toString().split(", ");
                 String[] mCohortList = CohortPick.getText().toString().split(", ");
-                String id = generateId();
+//                String id = generateId();
 
                 boolean cohortEmpty = mCohortList[0].equalsIgnoreCase("Assign Cohorts");
                 boolean profsEmpty = mProfList[0].equalsIgnoreCase("Assign Professors");
@@ -231,20 +228,20 @@ public class AddCourseActivity extends AppCompatActivity{
 
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
+                    Lesson l = new Lesson(mSubject,mVenue,new ArrayList<>(Arrays.asList(mCohortList)),new ArrayList<>(Arrays.asList(mProfList)),mDuration);
                     Map<String, Object> newCourse = new HashMap<>();
-                    newCourse.put("duration", mDuration);
-                    newCourse.put("location", mVenue);
+                    newCourse.put("duration", l.getDuration());
+                    newCourse.put("location", l.getLocation());
 
                     putProfs(newCourse,mProfList);
 
-                    newCourse.put("cohorts", new ArrayList<>(Arrays.asList(mCohortList)));
-                    newCourse.put("subject", mSubject);
+                    newCourse.put("cohorts", new ArrayList<>(l.getCohorts()));
+                    newCourse.put("subject", l.getSubject());
 
                     Map<String, Object> docData = new HashMap<>();
-                    docData.put(id,newCourse);
-                    Lesson l = new Lesson(mSubject,mVenue,new ArrayList<>(Arrays.asList(mCohortList)),new ArrayList<>(Arrays.asList(mProfList)),mDuration,id);
-                    LESSONS.add(l);
+                    docData.put(l.getId(),newCourse);
+
+                    AddedLessons.getInstance().addLesson(l);
 
                     String username = mAuth.getCurrentUser().getDisplayName();
                     db.collection("lessons").document(username)
@@ -282,7 +279,6 @@ public class AddCourseActivity extends AppCompatActivity{
     }
 
     private void setProgressValue(final int progress) {
-
         // set the progress
         mProgress.setProgress(progress);
         // thread is used to change the progress value

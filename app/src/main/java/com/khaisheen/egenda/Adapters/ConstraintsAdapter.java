@@ -18,6 +18,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.khaisheen.egenda.Activities.ConstraintsActivity;
+import com.khaisheen.egenda.Data.AddedConstraints;
 import com.khaisheen.egenda.Data.Constraint;
 import com.khaisheen.egenda.R;
 
@@ -33,9 +34,9 @@ public class ConstraintsAdapter extends RecyclerView.Adapter {
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    ArrayList<Constraint> constraints;
+    AddedConstraints constraints;
 
-    public ConstraintsAdapter(ArrayList<Constraint> constraints) {
+    public ConstraintsAdapter(AddedConstraints constraints) {
         this.constraints = constraints;
     }
 

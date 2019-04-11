@@ -9,9 +9,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.khaisheen.egenda.Adapters.LessonsAdapter;
+import com.khaisheen.egenda.Data.AddedLessons;
 import com.khaisheen.egenda.R;
 
-import static com.khaisheen.egenda.Activities.MainActivity.LESSONS;
 
 public class LessonsActivity extends Activity {
 
@@ -22,7 +22,7 @@ public class LessonsActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        rvClasses.setAdapter(new LessonsAdapter(LESSONS));
+        rvClasses.setAdapter(new LessonsAdapter(AddedLessons.getInstance()));
     }
 
     @Override

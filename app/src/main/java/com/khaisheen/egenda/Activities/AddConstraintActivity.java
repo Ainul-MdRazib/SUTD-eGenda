@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+import com.khaisheen.egenda.Data.AddedConstraints;
 import com.khaisheen.egenda.Data.Constraint;
 import com.khaisheen.egenda.R;
 
@@ -26,7 +27,7 @@ import java.util.Map;
 import java.util.Random;
 
 import static com.khaisheen.egenda.Activities.MainActivity.CONSTRAINTS;
-import static com.khaisheen.egenda.Activities.MainActivity.START_TIME_MAP;
+import static com.khaisheen.egenda.Data.Constraint.START_TIME_MAP;
 
 public class AddConstraintActivity extends Activity {
 
@@ -94,8 +95,7 @@ public class AddConstraintActivity extends Activity {
         constraint.put("duration", duration);
 
         Constraint c = new Constraint(tempDay, tempStartTime, tempDuration);
-//        CONSTRAINTS.add(c);
-        tempNotifyConstraintAdded(c);
+        AddedConstraints.getInstance().add(c);
 
 
         Map<String, Object> docData = new HashMap<>();
@@ -126,18 +126,4 @@ public class AddConstraintActivity extends Activity {
         return START_TIME_MAP.get(inp);
     }
 
-    private void tempNotifyConstraintAdded(Constraint c){
-        boolean newConstraintOfSameDayExists = false;
-        for(Constraint existingConstraint : CONSTRAINTS){
-            if(existingConstraint.getDay().equals(c.getDay())){
-                existingConstraint.setDuration(c.getDuration());
-                existingConstraint.setStartTime(c.getStartTime());
-                newConstraintOfSameDayExists = true;
-            }
-        }
-        System.out.println("Same constraint day exits : " + newConstraintOfSameDayExists);
-        if(!newConstraintOfSameDayExists){
-            CONSTRAINTS.add(c);
-        }
-    }
 }

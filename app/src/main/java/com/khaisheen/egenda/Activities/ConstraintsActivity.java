@@ -18,6 +18,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.khaisheen.egenda.Adapters.ConstraintsAdapter;
+import com.khaisheen.egenda.Data.AddedConstraints;
 import com.khaisheen.egenda.Data.Constraint;
 import com.khaisheen.egenda.R;
 
@@ -36,7 +37,7 @@ public class ConstraintsActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        rvConstraints.setAdapter(new ConstraintsAdapter(CONSTRAINTS));
+        rvConstraints.setAdapter(new ConstraintsAdapter(AddedConstraints.getInstance()));
     }
 
     @Override

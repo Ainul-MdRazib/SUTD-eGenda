@@ -74,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity{
                                             Toast.LENGTH_LONG).show();
                                     mAuth.signInWithEmailAndPassword(mEmail,mPass);
                                     try {
-                                        Thread.sleep(2000);
+                                        Thread.sleep(5000);
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
