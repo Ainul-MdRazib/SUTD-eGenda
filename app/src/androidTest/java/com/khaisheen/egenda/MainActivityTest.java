@@ -41,7 +41,6 @@ public class MainActivityTest {
         assertNotNull(mActivity.findViewById(R.id.MainGreeting));
         assertNotNull(mActivity.findViewById(R.id.ViewSchButton));
         assertNotNull(mActivity.findViewById(R.id.LogOutButton));
-        assertNotNull(mActivity.findViewById(R.id.AddSubjButton));
 
     }
 
@@ -56,6 +55,7 @@ public class MainActivityTest {
 
     }
 
+    /*
     @Test
     public void testAddCourseActivityAccess(){
 
@@ -63,7 +63,7 @@ public class MainActivityTest {
         activity = getInstrumentation().waitForMonitorWithTimeout(addCourseMonitor, 5000);
         assertNotNull(activity);
 
-    }
+    }*/
 
     @Test
     public void testLogOut(){

@@ -93,8 +93,9 @@ public class ChatActivity extends AppCompatActivity {
         mMessagesList.setAdapter(mAdapter);
 
         db = FirebaseFirestore.getInstance();
-        pillarMessages = db.collection("chat").document("ISTD").collection("istdMessages");
+        pillarMessages = db.collection("chat").document("ESD").collection("esdMessages");
 
+        mToolbar.setTitle("ESD");
         loadMessages();
 
         sendButton = (ImageButton) findViewById(R.id.sendButton);
@@ -131,8 +132,8 @@ public class ChatActivity extends AppCompatActivity {
 
     }
     private void loadMessages(){
-        db.collection("chat").document("ISTD")
-                .collection("istdMessages")
+        db.collection("chat").document("ESD")
+                .collection("esdMessages")
                 .orderBy("timestamp", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override

@@ -48,31 +48,20 @@ public class LoginActivity extends AppCompatActivity {
 
         mProgress = new ProgressDialog(LoginActivity.this);
 
+        Intent intent = getIntent();
+        String activity = intent.getStringExtra("from");
+
 
         /* LOG IN */
         /* TODO: AUTH STUFF */
         final FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        if(currentUser == null){
-            Toast.makeText(LoginActivity.this, "Please sign in with your sutd.edu.sg email.",Toast.LENGTH_LONG).show();
-            System.out.println("No login");
-        }
-        else{
-            System.out.println(currentUser.getEmail() + " is logged in.");
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-        }
-
 
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String mEmail = EmailField.getEditableText().toString();
                 String mPass = PassField.getEditableText().toString();
-                if(mEmail.equals("") && mPass.equals("")){
-                    Toast.makeText(LoginActivity.this, "Retype your SUTD email and password.", Toast.LENGTH_LONG).show();
-                }else{
-                    signIn(mEmail,mPass);
-                }
+                signIn(mEmail,mPass);
             }
         });
 
@@ -107,8 +96,8 @@ public class LoginActivity extends AppCompatActivity {
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            finish();
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                            finish();
+//                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         }
 
                     }

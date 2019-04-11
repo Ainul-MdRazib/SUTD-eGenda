@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.khaisheen.egenda.Adapters.LessonsAdapter;
+import com.khaisheen.egenda.Data.AddedLessons;
 import com.khaisheen.egenda.R;
+
 
 public class LessonsActivity extends Activity {
 
@@ -18,12 +20,17 @@ public class LessonsActivity extends Activity {
     Button BackButton;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        rvClasses.setAdapter(new LessonsAdapter(AddedLessons.getInstance()));
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lessons);
         rvClasses = findViewById(R.id.rvClasses);
         rvClasses.setLayoutManager(new LinearLayoutManager(this));
-        rvClasses.setAdapter(new LessonsAdapter());
 
         AddLessonButton = findViewById(R.id.AddLessonButton);
         BackButton = findViewById(R.id.LessonsButtonBack);

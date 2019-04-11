@@ -1,18 +1,12 @@
 package com.khaisheen.egenda.Activities;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -21,18 +15,21 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+import com.khaisheen.egenda.Data.AddedLessons;
+import com.khaisheen.egenda.Data.Lesson;
 import com.khaisheen.egenda.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
 public class AddCourseActivity extends AppCompatActivity{
+    final String alnumCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
     private Button SubmitButton;
     private Button CancelButton;
@@ -53,7 +50,6 @@ public class AddCourseActivity extends AppCompatActivity{
 
     private String TAG ="101";
 
-    private String pillar = "ISTD";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -211,26 +207,35 @@ public class AddCourseActivity extends AppCompatActivity{
                 String mVenue = VenueSpinner.getSelectedItem().toString();
                 String[] mProfList = ProfPick.getText().toString().split(", ");
                 String[] mCohortList = CohortPick.getText().toString().split(", ");
+//                String id = generateId();
 
-                if(mSubject.equals("")|mDuration.equals("")|mVenue.equals("")){
+                boolean cohortEmpty = mCohortList[0].equalsIgnoreCase("Assign Cohorts");
+                boolean profsEmpty = mProfList[0].equalsIgnoreCase("Assign Professors");
+                if(mSubject.equals("")||mDuration.equals("")||mVenue.equals("")||cohortEmpty||profsEmpty){
                     Toast.makeText(AddCourseActivity.this, "Please fill out all sections.", Toast.LENGTH_LONG).show();
                 }else{
 
                     setProgressValue(progress);
 
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    Lesson l = new Lesson(mSubject,mVenue,new ArrayList<>(Arrays.asList(mCohortList)),new ArrayList<>(Arrays.asList(mProfList)),mDuration);
                     Map<String, Object> newCourse = new HashMap<>();
-                    newCourse.put("name", mSubject);
-                    newCourse.put("duration", mDuration);
-                    newCourse.put("venue", mVenue);
-                    newCourse.put("profs", Arrays.asList(mProfList));
-                    newCourse.put("cohorts", Arrays.asList(mCohortList));
+                    newCourse.put("duration", l.getDuration());
+//                    newCourse.put("location", l.getLocation());
+                    putLocation(newCourse, l.getLocation());
+                    putProfs(newCourse,mProfList);
+
+                    newCourse.put("cohorts", new ArrayList<>(l.getCohorts()));
+                    newCourse.put("subject", l.getSubject());
 
                     Map<String, Object> docData = new HashMap<>();
-                    docData.put(mSubject,newCourse);
+                    docData.put(l.getId(),newCourse);
 
-                    db.collection("pillar").document(pillar)
+                    AddedLessons.getInstance().addLesson(l);
+
+                    String username = mAuth.getCurrentUser().getDisplayName();
+                    db.collection("dummy").document(username)
                             .set(docData, SetOptions.merge())
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -265,7 +270,6 @@ public class AddCourseActivity extends AppCompatActivity{
     }
 
     private void setProgressValue(final int progress) {
-
         // set the progress
         mProgress.setProgress(progress);
         // thread is used to change the progress value
@@ -281,6 +285,23 @@ public class AddCourseActivity extends AppCompatActivity{
             }
         });
         thread.start();
+    }
+
+
+    private void putProfs(Map<String,Object> newCourse, String[] mProfList){
+        ArrayList<String> tempProfList = new ArrayList<>(Arrays.asList(mProfList));
+        if(tempProfList.size() > 1){
+            newCourse.put("shared",tempProfList);
+        }
+    }
+
+    private void putLocation(Map<String,Object> newCourse, String location){
+        if(location.equals("Lecture Theatre")){
+            newCourse.put("location", "lt");
+        }
+        else if(location.equals("Cohort Classroom")){
+            newCourse.put("location", "cc");
+        }
     }
 
 }

@@ -62,23 +62,31 @@ public class RegisterActivity extends AppCompatActivity{
                             Toast.LENGTH_LONG).show();
                 }else{
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
-                    DocumentReference docIdRef = db.collection("professors").document(mEmail);
+                    DocumentReference docIdRef = db.collection("employees").document(mEmail);
                     docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
                                 if (document.exists()) {
+                                    Toast.makeText(RegisterActivity.this, "Registering your account...",
+                                            Toast.LENGTH_SHORT).show();
                                     createAcc(mDisplayName,mEmail,mPass);
-                                    Toast.makeText(RegisterActivity.this, "Congratulations! Logging you in...",
-                                            Toast.LENGTH_LONG).show();
-                                    mAuth.signInWithEmailAndPassword(mEmail,mPass);
                                     try {
-                                        Thread.sleep(2000);
+                                        Thread.sleep(1000);
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
-                                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                    Toast.makeText(RegisterActivity.this, "Registered! Returning to login...",
+                                            Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    intent.putExtra("from","register");
+                                    try {
+                                        Thread.sleep(1000);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    startActivity(intent);
                                     finish();
                                 } else {
                                     Toast.makeText(RegisterActivity.this, "Error: your email is not in the database. Check the email address provided for typos.",

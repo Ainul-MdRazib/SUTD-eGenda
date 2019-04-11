@@ -23,40 +23,28 @@
         android:id="@+id/ViewSchButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         android:text="View Schedule"
         android:textSize="14dp"
-        app:layout_constraintBottom_toTopOf="@+id/AddSubjButton"
-        app:layout_constraintTop_toBottomOf="@+id/MainGreeting" />
-
-    <Button
-        android:id="@+id/AddSubjButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="30dp"
-        android:text="Add Subject"
-        app:layout_constraintBottom_toTopOf="@+id/MyLessonsButton"
-        app:layout_constraintTop_toBottomOf="@+id/ViewSchButton" />
+        app:layout_constraintTop_toBottomOf="@+id/MainGreeting" />
 
     <Button
         android:id="@+id/MyLessonsButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="30dp"
         android:text="My Lessons"
-        app:layout_constraintTop_toBottomOf="@+id/AddSubjButton" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ViewSchButton" />
 
     <Button
         android:id="@+id/ConstraintsButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Constraints"
+        android:text="My Constraints"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MyLessonsButton" />
