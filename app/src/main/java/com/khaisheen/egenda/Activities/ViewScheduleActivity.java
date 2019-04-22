@@ -14,16 +14,21 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.khaisheen.egenda.Data.CsvGenerator;
 import com.khaisheen.egenda.R;
+
+import java.io.IOException;
 
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 public class ViewScheduleActivity extends AppCompatActivity {
 
-    Button buttonBack;
-    Button buttonDownload;
+    FirebaseFirestore db;
+    CsvGenerator csvGen;
+    Button buttonBack, buttonDownload, buttonGet;
     ImageView imageViewOfSchedule;
     private StorageReference mStorageRef;
 
@@ -32,11 +37,16 @@ public class ViewScheduleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_view_schedule);
+
+        // db
+        db = FirebaseFirestore.getInstance();
+        csvGen = new CsvGenerator(db, this.getApplicationContext());
         // Views
         buttonBack = findViewById(R.id.buttonBack);
         // TODO something with imageview and download button (NOT SO SOON)
         imageViewOfSchedule = findViewById(R.id.imageViewOfSchedule);
         buttonDownload = findViewById(R.id.buttonDownload);
+        buttonGet = findViewById(R.id.btnGet);
         // Go to MainActivity with back button.
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +55,12 @@ public class ViewScheduleActivity extends AppCompatActivity {
             }
         });
 
+        buttonGet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                csvGen.getTimetableFor("david yau"); // This is where i set the prof name for the csvgenerator
+            }
+        });
 
         buttonDownload.setOnClickListener(new View.OnClickListener() {
             @Override

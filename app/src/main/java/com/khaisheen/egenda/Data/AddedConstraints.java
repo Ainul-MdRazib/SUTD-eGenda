@@ -30,6 +30,9 @@ public class AddedConstraints {
 //        String username = auth.getCurrentUser().getDisplayName();
         String username = "Booga";
         constraints = new ArrayList<>();
+        if(username == null){
+            return;
+        }
         if(!username.equals("")) {
             db.collection("prof_constraints").document(username).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
