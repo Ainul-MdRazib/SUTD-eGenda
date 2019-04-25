@@ -44,6 +44,9 @@ public class AddedLessons {
         String username = auth.getCurrentUser().getDisplayName();
         //String username = "Booga";
         lessons = new ArrayList<>();
+        if(username == null){
+            return;
+        }
         if(!username.equals("")) {
             db.collection("dummy").document(username).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override

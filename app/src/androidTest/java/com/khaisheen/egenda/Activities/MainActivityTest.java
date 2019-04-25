@@ -2,8 +2,12 @@ package com.khaisheen.egenda.Activities;
 
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.khaisheen.egenda.R;
 
 import org.junit.After;
@@ -38,9 +42,44 @@ public class MainActivityTest {
     }
 
     @Test
+    public void testUserLoggedIn() throws InterruptedException {
+
+        FirebaseApp.initializeApp(InstrumentationRegistry.getTargetContext());
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        if(mAuth.getCurrentUser() != null){
+            mAuth.signOut();
+        }
+
+        mAuth.signInWithEmailAndPassword("booga@sutd.edu.sg","boogaboo");
+        Thread.sleep(2000);
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        assertNotNull(user);
+    }
+
+    @Test
+    public void userDisplayNameTest() throws InterruptedException {
+        FirebaseApp.initializeApp(InstrumentationRegistry.getTargetContext());
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        if(mAuth.getCurrentUser() != null){
+            mAuth.signOut();
+        }
+
+        mAuth.signInWithEmailAndPassword("booga@sutd.edu.sg","boogaboo");
+        Thread.sleep(2000);
+        FirebaseUser user = mAuth.getCurrentUser();
+        String displayName = user.getDisplayName();
+
+        assertNotNull(user);
+        assertEquals("Display name error","Booga",user.getDisplayName());
+
+    }
+
+    @Test
     public void testAllViewsExist(){
         assertNotNull(mActivity.findViewById(R.id.MainGreeting));
-
         assertNotNull(mActivity.findViewById(R.id.ViewSchButton));
         assertNotNull(mActivity.findViewById(R.id.LogOutButton));
         assertNotNull(mActivity.findViewById(R.id.MyLessonsButton));
