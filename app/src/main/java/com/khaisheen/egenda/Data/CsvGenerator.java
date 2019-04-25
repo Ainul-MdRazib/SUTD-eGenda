@@ -7,18 +7,19 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.opencsv.CSVWriter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import com.opencsv.CSVWriter;
 
 public class CsvGenerator {
     ArrayList<String> timeFromIndex = new ArrayList<>(
@@ -26,7 +27,7 @@ public class CsvGenerator {
                     "11:30:00", "12:00:00", "12:30:00", "13:00:00", "13:30:00", "14:00:00",
                     "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00",
                     "17:30:00"
-            ));
+                    ));
 
     HashMap<String, String> firstWeekMap = new HashMap<String, String>(){{
         put("monday", "2019-01-28");
