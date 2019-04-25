@@ -1,12 +1,14 @@
 package com.khaisheen.egenda.Data;
 
 import android.content.Context;
+import android.os.Environment;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -39,8 +41,11 @@ public class CsvGenerator {
     Context context;
     CSVWriter csvWriter;
     ArrayList<Long> writtenIds;
+    String savedFileDirectory;
 
-
+    public String getSavedFileDirectory() {
+        return savedFileDirectory;
+    }
 
     public CsvGenerator(FirebaseFirestore db, Context context) {
         this.db = db;
@@ -100,7 +105,12 @@ public class CsvGenerator {
 
     private void setCSVWriterOutput(String targetProf){
         try {
-            FileOutputStream outputStream = context.openFileOutput(targetProf + ".csv", Context.MODE_PRIVATE);
+            File downloads = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),targetProf + ".csv");
+//            String csvPath = downloads.getAbsolutePath() + "\\" + targetProf + ".csv";
+            savedFileDirectory = downloads.getAbsolutePath();
+            FileOutputStream outputStream = new FileOutputStream(downloads);
+            System.out.println("WRITABLE? " + Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()));
+//            FileOutputStream outputStream = context.openFileOutput(targetProf + ".csv", Context.MODE_PRIVATE);
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
             csvWriter = new CSVWriter(outputStreamWriter);
             String[] header = {"Subject", "Description", "Start Date", "Start Time", "End Date",  "End Time", "Location"}; // Here is the header

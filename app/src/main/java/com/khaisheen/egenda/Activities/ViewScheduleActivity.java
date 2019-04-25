@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -27,6 +29,7 @@ import static android.os.Environment.DIRECTORY_DOWNLOADS;
 public class ViewScheduleActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
+    FirebaseAuth auth;
     CsvGenerator csvGen;
     Button buttonBack, buttonDownload, buttonGet;
     ImageView imageViewOfSchedule;
@@ -38,6 +41,8 @@ public class ViewScheduleActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_view_schedule);
 
+        // auth
+        auth = FirebaseAuth.getInstance();
         // db
         db = FirebaseFirestore.getInstance();
         csvGen = new CsvGenerator(db, this.getApplicationContext());
@@ -45,7 +50,6 @@ public class ViewScheduleActivity extends AppCompatActivity {
         buttonBack = findViewById(R.id.buttonBack);
         // TODO something with imageview and download button (NOT SO SOON)
         imageViewOfSchedule = findViewById(R.id.imageViewOfSchedule);
-        buttonDownload = findViewById(R.id.buttonDownload);
         buttonGet = findViewById(R.id.btnGet);
         // Go to MainActivity with back button.
         buttonBack.setOnClickListener(new View.OnClickListener() {
@@ -58,18 +62,10 @@ public class ViewScheduleActivity extends AppCompatActivity {
         buttonGet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                csvGen.getTimetableFor("david yau"); // This is where i set the prof name for the csvgenerator
+                csvGen.getTimetableFor(auth.getCurrentUser().getDisplayName().toString()); // This is where i set the prof name for the csvgenerator
+                Toast.makeText(ViewScheduleActivity.this, "File saved in: " + csvGen.getSavedFileDirectory(), Toast.LENGTH_SHORT).show();
             }
         });
-
-        buttonDownload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                download();
-
-            }
-        });
-
 
     }
 
