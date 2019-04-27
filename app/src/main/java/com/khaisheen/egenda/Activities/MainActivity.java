@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     TextView MainGreeting;
-    Button ViewSchButton;
+    Button DownloadTimetableActivity;
     Button AddSubjButton;
     Button LogOutButton;
     Button MyLessonsButton;
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         MainGreeting = findViewById(R.id.MainGreeting);
-        ViewSchButton = findViewById(R.id.ViewSchButton);
+        DownloadTimetableActivity = findViewById(R.id.ViewSchButton);
         LogOutButton = findViewById(R.id.LogOutButton);
         MyLessonsButton = findViewById(R.id.MyLessonsButton);
         ConstraintsButton = findViewById(R.id.ConstraintsButton);
@@ -92,10 +92,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        ViewSchButton.setOnClickListener(new View.OnClickListener() {
+        DownloadTimetableActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ViewScheduleActivity.class));
+                startActivity(new Intent(MainActivity.this, DownloadTimetableActivity.class));
             }
         });
 

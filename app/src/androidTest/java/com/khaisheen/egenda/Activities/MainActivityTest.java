@@ -28,7 +28,7 @@ public class MainActivityTest {
     private MainActivity mActivity = null;
     Activity activity;
 
-    Instrumentation.ActivityMonitor viewSchedMonitor = getInstrumentation().addMonitor(ViewScheduleActivity.class.getName(),null,false);
+    Instrumentation.ActivityMonitor viewSchedMonitor = getInstrumentation().addMonitor(DownloadTimetableActivity.class.getName(),null,false);
     Instrumentation.ActivityMonitor lessonMonitor = getInstrumentation().addMonitor(LessonsActivity.class.getName(),null, false);
     Instrumentation.ActivityMonitor constraintMonitor = getInstrumentation().addMonitor(ConstraintsActivity.class.getName(),null,false);
     Instrumentation.ActivityMonitor chatMonitor = getInstrumentation().addMonitor(ChatActivity.class.getName(),null,false);

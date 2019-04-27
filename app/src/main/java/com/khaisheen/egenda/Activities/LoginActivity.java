@@ -101,16 +101,12 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-    protected void signIn(String email, String password){
-        mProgress.setMessage("Logging you in...");
-        mProgress.setCancelable(false);
-        mProgress.setIndeterminate(true);
+    protected void signIn(String email, String password){;
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        mProgress.dismiss();
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
