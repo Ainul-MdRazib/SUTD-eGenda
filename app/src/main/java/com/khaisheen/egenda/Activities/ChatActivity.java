@@ -95,7 +95,7 @@ public class ChatActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         pillarMessages = db.collection("chat").document("ESD").collection("esdMessages");
 
-        mToolbar.setTitle("ESD");
+        mToolbar.setTitle("EPD");
         loadMessages();
 
         sendButton = (ImageButton) findViewById(R.id.sendButton);

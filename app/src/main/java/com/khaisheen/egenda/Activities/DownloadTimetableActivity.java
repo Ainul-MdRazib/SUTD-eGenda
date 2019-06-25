@@ -45,7 +45,7 @@ public class DownloadTimetableActivity extends AppCompatActivity {
         csvGen = new CsvGenerator(db, this.getApplicationContext());
         // Views
         buttonBack = findViewById(R.id.buttonBack);
-        
+
         buttonGet = findViewById(R.id.btnGet);
         // Go to MainActivity with back button.
         buttonBack.setOnClickListener(new View.OnClickListener() {
